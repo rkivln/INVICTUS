@@ -37,8 +37,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenContact, onExploreProjects }) 
 
         {/* Monospace Subtitle */}
         <p className="font-mono-geist text-[14px] sm:text-[16px] md:text-[18px] leading-[1.6] sm:leading-[28px] text-black/75 max-w-[600px] mb-8 sm:mb-10">
-          Computer Science and Business Systems student at SMVEC, building useful
-          digital products at the intersection of software engineering, generative AI,
+         Intersection of software engineering, generative AI,
           cybersecurity, and thoughtful interface design.
         </p>
 
