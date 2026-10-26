@@ -1,5 +1,7 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import { CornerCrossBox } from './CornerCrossBox';
+import { MotionReveal } from './MotionReveal';
 
 export const AutonomousEra: React.FC = () => {
   return (
@@ -21,19 +23,27 @@ export const AutonomousEra: React.FC = () => {
       </div>
 
       <div className="relative z-10 max-w-[1400px] mx-auto px-6 md:px-12 flex flex-col items-center text-center">
-        {/* Pre-heading Tag */}
-        <div className="inline-flex items-center gap-1.5 text-xs md:text-sm font-mono-geist font-medium text-black mb-6">
-          <span className="text-[#0700ff] font-bold">+</span>
-          <span className="uppercase tracking-[0.08em]">THE DEVELOPER ETHOS</span>
-        </div>
+        <MotionReveal direction="up" distance={25}>
+          {/* Pre-heading Tag */}
+          <div className="inline-flex items-center gap-1.5 text-xs md:text-sm font-mono-geist font-medium text-black mb-6">
+            <span className="text-[#0700ff] font-bold">+</span>
+            <span className="uppercase tracking-[0.08em]">THE DEVELOPER ETHOS</span>
+          </div>
 
-        {/* Heading */}
-        <h2 className="font-serif-instrument text-[48px] sm:text-[64px] md:text-[80px] leading-[1.0] tracking-[-0.025em] font-normal text-black mb-16 max-w-[950px]">
-          The next generation of software will not wait for instructions.
-        </h2>
+          {/* Heading */}
+          <h2 className="font-serif-instrument text-[48px] sm:text-[64px] md:text-[80px] leading-[1.0] tracking-[-0.025em] font-normal text-black mb-16 max-w-[950px]">
+            The next generation of software will not wait for instructions.
+          </h2>
+        </MotionReveal>
 
         {/* Big Cobalt Blue Quote Box */}
-        <div className="w-full max-w-[720px] shadow-2xl relative">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.96, y: 30 }}
+          whileInView={{ opacity: 1, scale: 1, y: 0 }}
+          viewport={{ once: true, margin: '-40px' }}
+          transition={{ duration: 0.7, delay: 0.15, ease: [0.215, 0.61, 0.355, 1] }}
+          className="w-full max-w-[720px] shadow-2xl relative"
+        >
           <div className="bg-[#0700ff] p-8 sm:p-12 text-white relative">
             <CornerCrossBox
               dashed={true}
@@ -59,7 +69,7 @@ export const AutonomousEra: React.FC = () => {
               </div>
             </CornerCrossBox>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

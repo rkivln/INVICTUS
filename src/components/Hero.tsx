@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import { SlidingButton } from './SlidingButton';
 
 interface HeroProps {
@@ -9,8 +10,13 @@ interface HeroProps {
 export const Hero: React.FC<HeroProps> = ({ onOpenContact, onExploreProjects }) => {
   return (
     <section className="relative w-full overflow-hidden min-h-[580px] sm:min-h-[660px] lg:min-h-[760px] flex items-start pt-4 sm:pt-8">
-      {/* Halftone Angel Sculpture Image */}
-      <div className="absolute inset-0 w-full h-full pointer-events-none select-none z-0">
+      {/* Halftone Angel Sculpture Image with gentle floating motion */}
+      <motion.div
+        initial={{ opacity: 0, scale: 1.03 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 1.2, ease: [0.215, 0.61, 0.355, 1] }}
+        className="absolute inset-0 w-full h-full pointer-events-none select-none z-0"
+      >
         <img
           src="https://framerusercontent.com/images/0w0qwEFKa288EqQq2SBotntUpbE.png?width=1672&height=941"
           alt="A halftone angel sculpture representing intelligent systems and purposeful engineering."
@@ -18,31 +24,51 @@ export const Hero: React.FC<HeroProps> = ({ onOpenContact, onExploreProjects }) 
         />
         {/* Subtle mobile readability gradient overlay */}
         <div className="absolute inset-0 bg-gradient-to-r from-[#f5f5f5] via-[#f5f5f5]/70 to-transparent md:hidden pointer-events-none" />
-      </div>
+      </motion.div>
 
       <div className="relative z-10 max-w-[1440px] w-full mx-auto px-5 sm:px-6 md:px-8 pt-4 pb-12 sm:pt-8 sm:pb-16 flex flex-col justify-start">
         {/* Monospace Pre-heading Tag */}
-        <div className="inline-flex items-start sm:items-center gap-1.5 text-xs sm:text-xs md:text-sm font-mono-geist font-medium text-black mb-6 sm:mb-8">
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.1, ease: [0.215, 0.61, 0.355, 1] }}
+          className="inline-flex items-start sm:items-center gap-1.5 text-xs sm:text-xs md:text-sm font-mono-geist font-medium text-black mb-6 sm:mb-8"
+        >
           <span className="text-[#0700ff] font-bold">+</span>
           <span className="uppercase tracking-[0.08em] max-w-[280px] sm:max-w-none">
             OPEN SOURCE DEVELOPER & FULL STACK ENGINEER
           </span>
-        </div>
+        </motion.div>
 
         {/* Main Serif Headline */}
-        <h1 className="font-serif-instrument text-[52px] sm:text-[80px] md:text-[110px] leading-[0.91] tracking-[-2px] sm:tracking-[-3px] font-normal text-black mb-6 sm:mb-8 max-w-[700px]">
+        <motion.h1
+          initial={{ opacity: 0, y: 25 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.25, ease: [0.215, 0.61, 0.355, 1] }}
+          className="font-serif-instrument text-[52px] sm:text-[80px] md:text-[110px] leading-[0.91] tracking-[-2px] sm:tracking-[-3px] font-normal text-black mb-6 sm:mb-8 max-w-[700px]"
+        >
           Engineering,<br />
           built with intent.
-        </h1>
+        </motion.h1>
 
         {/* Monospace Subtitle */}
-        <p className="font-mono-geist text-[14px] sm:text-[16px] md:text-[18px] leading-[1.6] sm:leading-[28px] text-black/75 max-w-[600px] mb-8 sm:mb-10">
-         Intersection of software engineering, generative AI,
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.4, ease: [0.215, 0.61, 0.355, 1] }}
+          className="font-mono-geist text-[14px] sm:text-[16px] md:text-[18px] leading-[1.6] sm:leading-[28px] text-black/75 max-w-[600px] mb-8 sm:mb-10"
+        >
+          Intersection of software engineering, generative AI,
           cybersecurity, and thoughtful interface design.
-        </p>
+        </motion.p>
 
         {/* Action Buttons Row */}
-        <div className="flex flex-row items-center gap-3 sm:gap-4">
+        <motion.div
+          initial={{ opacity: 0, y: 18 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.55, ease: [0.215, 0.61, 0.355, 1] }}
+          className="flex flex-row items-center gap-3 sm:gap-4"
+        >
           <SlidingButton
             label1="View Projects"
             label2="Explore Work"
@@ -56,7 +82,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenContact, onExploreProjects }) 
             onClick={onOpenContact}
             className="h-[44px]"
           />
-        </div>
+        </motion.div>
       </div>
     </section>
   );

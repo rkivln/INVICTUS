@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 import { CornerCrossBox } from './CornerCrossBox';
 
 interface SlidingButtonProps {
@@ -23,11 +24,9 @@ export const SlidingButton: React.FC<SlidingButtonProps> = ({
 
   const innerContent = (
     <div className="relative overflow-hidden h-[18px] w-full block select-none">
-      <div
-        className="transition-transform duration-300 ease-out"
-        style={{
-          transform: isHovered ? 'translateY(-18px)' : 'translateY(0px)',
-        }}
+      <motion.div
+        animate={{ y: isHovered ? -18 : 0 }}
+        transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
       >
         <div className="h-[18px] flex items-center justify-center font-mono-geist text-[13px] font-medium leading-[18px] whitespace-nowrap text-center">
           {label1}
@@ -35,16 +34,17 @@ export const SlidingButton: React.FC<SlidingButtonProps> = ({
         <div className="h-[18px] flex items-center justify-center font-mono-geist text-[13px] font-medium leading-[18px] whitespace-nowrap text-center text-[#0700ff] group-hover:text-inherit">
           {label2}
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 
   if (variant === 'secondary') {
     return (
-      <button
+      <motion.button
         onClick={onClick}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
+        whileTap={{ scale: 0.97 }}
         aria-label={ariaLabel || label1}
         className={`group relative cursor-pointer inline-flex items-center justify-center ${className}`}
       >
@@ -56,20 +56,21 @@ export const SlidingButton: React.FC<SlidingButtonProps> = ({
         >
           {innerContent}
         </CornerCrossBox>
-      </button>
+      </motion.button>
     );
   }
 
   // Primary: solid black button
   return (
-    <button
+    <motion.button
       onClick={onClick}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
+      whileTap={{ scale: 0.97 }}
       aria-label={ariaLabel || label1}
-      className={`group relative cursor-pointer inline-flex items-center justify-center px-6 h-[45px] bg-black text-white hover:bg-[#111111] transition-all duration-200 active:scale-[0.99] ${className}`}
+      className={`group relative cursor-pointer inline-flex items-center justify-center px-6 h-[45px] bg-black text-white hover:bg-[#111111] transition-all duration-200 ${className}`}
     >
       {innerContent}
-    </button>
+    </motion.button>
   );
 };

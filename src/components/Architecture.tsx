@@ -1,5 +1,7 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import { CornerCrossBox } from './CornerCrossBox';
+import { MotionReveal } from './MotionReveal';
 
 interface ArchitectureProps {
   onSelectProject?: (title: string) => void;
@@ -45,28 +47,38 @@ export const Architecture: React.FC<ArchitectureProps> = ({ onSelectProject }) =
   return (
     <section id="projects" className="relative w-full pt-20 pb-28 border-t border-dashed border-[#0700ff]/40 bg-[#f5f5f5]">
       <div className="max-w-[1440px] mx-auto px-6 md:px-8">
-        {/* Pre-heading Tag */}
-        <div className="inline-flex items-center gap-1.5 text-xs md:text-sm font-mono-geist font-medium text-black mb-6">
-          <span className="text-[#0700ff] font-bold">+</span>
-          <span className="uppercase tracking-[0.08em]">FEATURED ENGINEERING WORK</span>
-        </div>
+        <MotionReveal direction="up" distance={25}>
+          {/* Pre-heading Tag */}
+          <div className="inline-flex items-center gap-1.5 text-xs md:text-sm font-mono-geist font-medium text-black mb-6">
+            <span className="text-[#0700ff] font-bold">+</span>
+            <span className="uppercase tracking-[0.08em]">FEATURED ENGINEERING WORK</span>
+          </div>
 
-        {/* Heading */}
-        <h2 className="font-serif-instrument text-[56px] sm:text-[76px] md:text-[96px] leading-[0.96] tracking-[-0.03em] font-normal text-black mb-6">
-          Selected Projects
-        </h2>
+          {/* Heading */}
+          <h2 className="font-serif-instrument text-[56px] sm:text-[76px] md:text-[96px] leading-[0.96] tracking-[-0.03em] font-normal text-black mb-6">
+            Selected Projects
+          </h2>
 
-        {/* Description */}
-        <p className="font-mono-geist text-[15px] sm:text-[17px] md:text-[18px] leading-[1.6] text-black/70 mb-16 max-w-[660px]">
-          Flagship applications and system concepts developed across AI, cybersecurity, geolocation, and campus technology.
-        </p>
+          {/* Description */}
+          <p className="font-mono-geist text-[15px] sm:text-[17px] md:text-[18px] leading-[1.6] text-black/70 mb-16 max-w-[660px]">
+            Flagship applications and system concepts developed across AI, cybersecurity, geolocation, and campus technology.
+          </p>
+        </MotionReveal>
 
-        {/* 3 Step Cards Grid */}
+        {/* 3 Step Cards Grid without hover zoom/lift */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {projects.map((proj) => (
-            <div
+          {projects.map((proj, index) => (
+            <motion.div
               key={proj.title}
-              className="flex flex-col group cursor-pointer"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-30px' }}
+              transition={{
+                duration: 0.6,
+                delay: index * 0.12,
+                ease: [0.215, 0.61, 0.355, 1],
+              }}
+              className="flex flex-col cursor-pointer"
               onClick={() => onSelectProject?.(proj.title)}
             >
               {/* Image Box with Corner Crosses */}
@@ -74,12 +86,13 @@ export const Architecture: React.FC<ArchitectureProps> = ({ onSelectProject }) =
                 dashed={true}
                 borderColor="rgba(7, 0, 255, 0.4)"
                 crossColor="#0700ff"
-                className="w-full aspect-square bg-[#f5f5f5] p-2 flex items-center justify-center overflow-hidden mb-6 group-hover:border-[#0700ff] transition-colors"
+                hoverEffect={false}
+                className="w-full aspect-square bg-[#f5f5f5] p-2 flex items-center justify-center overflow-hidden mb-6"
               >
                 <img
                   src={proj.image}
                   alt={proj.alt}
-                  className="w-full h-full object-contain select-none group-hover:scale-105 transition-transform duration-300"
+                  className="w-full h-full object-contain select-none"
                 />
               </CornerCrossBox>
 
@@ -91,7 +104,7 @@ export const Architecture: React.FC<ArchitectureProps> = ({ onSelectProject }) =
               {/* Project Title */}
               <h3 className="font-serif-instrument text-[38px] sm:text-[44px] leading-[1.0] font-normal text-black mb-2 flex items-center justify-between">
                 <span>{proj.title}</span>
-                <span className="text-xl text-[#0700ff] opacity-0 group-hover:opacity-100 transition-opacity">
+                <span className="text-xl text-[#0700ff]">
                   ↗
                 </span>
               </h3>
@@ -105,7 +118,7 @@ export const Architecture: React.FC<ArchitectureProps> = ({ onSelectProject }) =
               <div className="mt-auto pt-2 font-mono-geist text-[11px] text-black/60 border-t border-dashed border-black/10">
                 {proj.tech}
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>

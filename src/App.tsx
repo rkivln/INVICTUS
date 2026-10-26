@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import Lenis from 'lenis';
+import 'lenis/dist/lenis.css';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { PartnersAndRelief } from './components/PartnersAndRelief';
@@ -16,6 +18,41 @@ import { ProjectDetailModal } from './components/ProjectDetailModal';
 export default function App() {
   const [contactOpen, setContactOpen] = useState(false);
   const [selectedProject, setSelectedProject] = useState<string | null>(null);
+  const [lenisInstance, setLenisInstance] = useState<Lenis | null>(null);
+
+  useEffect(() => {
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      smoothWheel: true,
+      touchMultiplier: 1.5,
+    });
+
+    setLenisInstance(lenis);
+    (window as any).lenis = lenis;
+
+    function raf(time: number) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+
+    requestAnimationFrame(raf);
+
+    // Stop Lenis when modal opens to prevent background scroll
+    return () => {
+      lenis.destroy();
+    };
+  }, []);
+
+  // Lock/Unlock Lenis when modals open or close
+  useEffect(() => {
+    if (!lenisInstance) return;
+    if (contactOpen || selectedProject !== null) {
+      lenisInstance.stop();
+    } else {
+      lenisInstance.start();
+    }
+  }, [contactOpen, selectedProject, lenisInstance]);
 
   const handleOpenContact = () => {
     setContactOpen(true);
@@ -26,9 +63,11 @@ export default function App() {
   };
 
   const handleExploreProjects = () => {
-    const el = document.getElementById('projects');
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth' });
+    if (lenisInstance) {
+      lenisInstance.scrollTo('#projects');
+    } else {
+      const el = document.getElementById('projects');
+      el?.scrollIntoView({ behavior: 'smooth' });
     }
   };
 

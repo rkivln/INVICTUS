@@ -1,96 +1,95 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 
 interface CornerCrossBoxProps {
-  children?: React.ReactNode;
+  children: React.ReactNode;
   className?: string;
-  crossColor?: string; // default blue '#0700ff'
-  borderColor?: string; // default 'rgba(7, 0, 255, 0.4)'
   dashed?: boolean;
-  style?: React.CSSProperties;
-  onClick?: () => void;
-  as?: keyof JSX.IntrinsicElements;
+  borderColor?: string;
+  crossColor?: string;
+  crossSize?: number;
+  hoverEffect?: boolean;
 }
 
 export const CornerCrossBox: React.FC<CornerCrossBoxProps> = ({
   children,
   className = '',
-  crossColor = '#0700ff',
-  borderColor = 'rgba(7, 0, 255, 0.4)',
   dashed = true,
-  style = {},
-  onClick,
+  borderColor = 'rgba(7, 0, 255, 0.4)',
+  crossColor = '#0700ff',
+  crossSize = 8,
+  hoverEffect = false,
 }) => {
+  const [isHovered, setIsHovered] = useState(false);
+
+  const borderStyle: React.CSSProperties = {
+    borderWidth: '1px',
+    borderStyle: dashed ? 'dashed' : 'solid',
+    borderColor: isHovered && hoverEffect ? '#0700ff' : borderColor,
+    transition: 'border-color 0.25s ease-out',
+  };
+
+  const renderCornerCross = (position: string) => {
+    let positionClasses = '';
+    switch (position) {
+      case 'top-left':
+        positionClasses = '-top-[4px] -left-[4px]';
+        break;
+      case 'top-right':
+        positionClasses = '-top-[4px] -right-[4px]';
+        break;
+      case 'bottom-left':
+        positionClasses = '-bottom-[4px] -left-[4px]';
+        break;
+      case 'bottom-right':
+        positionClasses = '-bottom-[4px] -right-[4px]';
+        break;
+    }
+
+    return (
+      <motion.div
+        aria-hidden="true"
+        className={`absolute ${positionClasses} pointer-events-none z-20 flex items-center justify-center`}
+        style={{ width: `${crossSize}px`, height: `${crossSize}px` }}
+        animate={{
+          rotate: isHovered && hoverEffect ? 90 : 0,
+          scale: isHovered && hoverEffect ? 1.15 : 1,
+        }}
+        transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+      >
+        {/* Horizontal bar */}
+        <div
+          className="absolute bg-current"
+          style={{
+            width: '100%',
+            height: '1.5px',
+            backgroundColor: isHovered && hoverEffect ? '#0700ff' : crossColor,
+          }}
+        />
+        {/* Vertical bar */}
+        <div
+          className="absolute bg-current"
+          style={{
+            height: '100%',
+            width: '1.5px',
+            backgroundColor: isHovered && hoverEffect ? '#0700ff' : crossColor,
+          }}
+        />
+      </motion.div>
+    );
+  };
+
   return (
     <div
-      onClick={onClick}
-      style={{
-        borderWidth: '1px',
-        borderStyle: dashed ? 'dashed' : 'solid',
-        borderColor: borderColor,
-        ...style,
-      }}
       className={`relative ${className}`}
+      style={borderStyle}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
     >
-      {/* Top Left Cross */}
-      <div
-        className="pointer-events-none absolute -top-[3px] -left-[3px] w-[5px] h-[5px]"
-        aria-hidden="true"
-      >
-        <span
-          className="absolute top-[2px] left-0 w-[5px] h-[1px]"
-          style={{ backgroundColor: crossColor }}
-        />
-        <span
-          className="absolute top-0 left-[2px] w-[1px] h-[5px]"
-          style={{ backgroundColor: crossColor }}
-        />
-      </div>
-
-      {/* Top Right Cross */}
-      <div
-        className="pointer-events-none absolute -top-[3px] -right-[3px] w-[5px] h-[5px]"
-        aria-hidden="true"
-      >
-        <span
-          className="absolute top-[2px] left-0 w-[5px] h-[1px]"
-          style={{ backgroundColor: crossColor }}
-        />
-        <span
-          className="absolute top-0 left-[2px] w-[1px] h-[5px]"
-          style={{ backgroundColor: crossColor }}
-        />
-      </div>
-
-      {/* Bottom Left Cross */}
-      <div
-        className="pointer-events-none absolute -bottom-[3px] -left-[3px] w-[5px] h-[5px]"
-        aria-hidden="true"
-      >
-        <span
-          className="absolute top-[2px] left-0 w-[5px] h-[1px]"
-          style={{ backgroundColor: crossColor }}
-        />
-        <span
-          className="absolute top-0 left-[2px] w-[1px] h-[5px]"
-          style={{ backgroundColor: crossColor }}
-        />
-      </div>
-
-      {/* Bottom Right Cross */}
-      <div
-        className="pointer-events-none absolute -bottom-[3px] -right-[3px] w-[5px] h-[5px]"
-        aria-hidden="true"
-      >
-        <span
-          className="absolute top-[2px] left-0 w-[5px] h-[1px]"
-          style={{ backgroundColor: crossColor }}
-        />
-        <span
-          className="absolute top-0 left-[2px] w-[1px] h-[5px]"
-          style={{ backgroundColor: crossColor }}
-        />
-      </div>
-
+      {renderCornerCross('top-left')}
+      {renderCornerCross('top-right')}
+      {renderCornerCross('bottom-left')}
+      {renderCornerCross('bottom-right')}
       {children}
     </div>
   );

@@ -1,4 +1,6 @@
 import React from 'react';
+import { motion } from 'framer-motion';
+import { MotionReveal } from './MotionReveal';
 
 export const Sequence: React.FC = () => {
   const phases = [
@@ -43,24 +45,32 @@ export const Sequence: React.FC = () => {
       </div>
 
       <div className="relative z-10 max-w-[1400px] mx-auto px-6 md:px-12 flex flex-col items-center text-center">
-        {/* Pre-heading Tag */}
-        <div className="inline-flex items-center gap-1.5 text-xs md:text-sm font-mono-geist font-medium text-black mb-6">
-          <span className="text-[#0700ff] font-bold">+</span>
-          <span className="uppercase tracking-[0.08em]">PRODUCT METHODOLOGY</span>
-        </div>
+        <MotionReveal direction="up" distance={25}>
+          {/* Pre-heading Tag */}
+          <div className="inline-flex items-center gap-1.5 text-xs md:text-sm font-mono-geist font-medium text-black mb-6">
+            <span className="text-[#0700ff] font-bold">+</span>
+            <span className="uppercase tracking-[0.08em]">PRODUCT METHODOLOGY</span>
+          </div>
 
-        {/* Heading */}
-        <h2 className="font-serif-instrument text-[54px] sm:text-[72px] md:text-[88px] leading-[0.98] tracking-[-0.025em] font-normal text-black mb-6">
-          The Sequence
-        </h2>
+          {/* Heading */}
+          <h2 className="font-serif-instrument text-[54px] sm:text-[72px] md:text-[88px] leading-[0.98] tracking-[-0.025em] font-normal text-black mb-6">
+            The Sequence
+          </h2>
 
-        {/* Subtitle */}
-        <p className="font-mono-geist text-[15px] sm:text-[17px] md:text-[18px] leading-[1.6] text-black/70 mb-16 max-w-[640px]">
-          Moving from early problem definition to dependable, production-ready software.
-        </p>
+          {/* Subtitle */}
+          <p className="font-mono-geist text-[15px] sm:text-[17px] md:text-[18px] leading-[1.6] text-black/70 mb-16 max-w-[640px]">
+            Moving from early problem definition to dependable, production-ready software.
+          </p>
+        </MotionReveal>
 
         {/* Central Sequence Card Container */}
-        <div className="w-full max-w-[640px] bg-[#f0f0f0]/80 shadow-[0_20px_50px_rgba(0,0,0,0.08)] border border-black/5 p-10 sm:p-14 flex flex-col gap-12 text-center">
+        <motion.div
+          initial={{ opacity: 0, y: 35 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-40px' }}
+          transition={{ duration: 0.7, delay: 0.15, ease: [0.215, 0.61, 0.355, 1] }}
+          className="w-full max-w-[640px] bg-[#f0f0f0]/80 shadow-[0_20px_50px_rgba(0,0,0,0.08)] border border-black/5 p-10 sm:p-14 flex flex-col gap-12 text-center"
+        >
           {phases.map((phase) => (
             <div key={phase.number} className="flex flex-col items-center">
               <h3 className="font-serif-instrument text-[38px] sm:text-[46px] leading-[1.0] font-normal text-black mb-2">
@@ -74,7 +84,7 @@ export const Sequence: React.FC = () => {
               </p>
             </div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

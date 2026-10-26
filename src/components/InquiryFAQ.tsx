@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { CornerCrossBox } from './CornerCrossBox';
+import { MotionReveal } from './MotionReveal';
 import { toggleFAQ } from '../utils/navigation';
 
 export const InquiryFAQ: React.FC = () => {
@@ -46,59 +48,77 @@ export const InquiryFAQ: React.FC = () => {
   return (
     <section className="relative w-full pt-20 pb-28 border-t border-dashed border-[#0700ff]/40 bg-[#f5f5f5]">
       <div className="max-w-[1440px] mx-auto px-6 md:px-8">
-        {/* Pre-heading Tag */}
-        <div className="inline-flex items-center gap-1.5 text-xs md:text-sm font-mono-geist font-medium text-black mb-6">
-          <span className="text-[#0700ff] font-bold">+</span>
-          <span className="uppercase tracking-[0.08em]">TECHNICAL STACK & CERTIFICATIONS</span>
-        </div>
+        <MotionReveal direction="up" distance={25}>
+          {/* Pre-heading Tag */}
+          <div className="inline-flex items-center gap-1.5 text-xs md:text-sm font-mono-geist font-medium text-black mb-6">
+            <span className="text-[#0700ff] font-bold">+</span>
+            <span className="uppercase tracking-[0.08em]">TECHNICAL STACK & CERTIFICATIONS</span>
+          </div>
 
-        {/* Heading */}
-        <h2 className="font-serif-instrument text-[56px] sm:text-[76px] md:text-[96px] leading-[0.96] tracking-[-0.03em] font-normal text-black mb-6">
-          The Inquiry
-        </h2>
+          {/* Heading */}
+          <h2 className="font-serif-instrument text-[56px] sm:text-[76px] md:text-[96px] leading-[0.96] tracking-[-0.03em] font-normal text-black mb-6">
+            The Inquiry
+          </h2>
 
-        {/* Subtitle */}
-        <p className="font-mono-geist text-[15px] sm:text-[17px] md:text-[18px] leading-[1.6] text-black/70 mb-14 max-w-[620px]">
-          Answers to practical questions regarding technical stack, AI models, certifications, and collaboration.
-        </p>
+          {/* Subtitle */}
+          <p className="font-mono-geist text-[15px] sm:text-[17px] md:text-[18px] leading-[1.6] text-black/70 mb-14 max-w-[620px]">
+            Answers to practical questions regarding technical stack, AI models, certifications, and collaboration.
+          </p>
+        </MotionReveal>
 
         {/* Accordion Container in solid cobalt blue */}
-        <div className="w-full bg-[#0700ff] text-white">
-          <CornerCrossBox
-            dashed={true}
-            borderColor="rgba(255, 255, 255, 0.4)"
-            crossColor="#ffffff"
-            className="p-6 sm:p-10"
-          >
-            <div className="divide-y divide-white/20">
-              {faqs.map((faq) => {
-                const isOpen = openId === faq.id;
-                return (
-                  <div key={faq.id} className="py-6 first:pt-0 last:pb-0">
-                    <button
-                      onClick={() => handleToggle(faq.id)}
-                      className="w-full flex items-center justify-between text-left group cursor-pointer focus:outline-none"
-                      aria-expanded={isOpen}
-                    >
-                      <span className="font-serif-instrument text-[24px] sm:text-[28px] md:text-[32px] font-normal text-white flex items-center gap-2 group-hover:text-white/90">
-                        <span className="opacity-80">+</span> {faq.question}
-                      </span>
-                      <span className="text-2xl text-white ml-4 flex-shrink-0 font-serif-instrument">
-                        {isOpen ? '—' : '+'}
-                      </span>
-                    </button>
+        <MotionReveal direction="up" distance={30} delay={0.15}>
+          <div className="w-full bg-[#0700ff] text-white">
+            <CornerCrossBox
+              dashed={true}
+              borderColor="rgba(255, 255, 255, 0.4)"
+              crossColor="#ffffff"
+              className="p-6 sm:p-10"
+            >
+              <div className="divide-y divide-white/20">
+                {faqs.map((faq) => {
+                  const isOpen = openId === faq.id;
+                  return (
+                    <div key={faq.id} className="py-6 first:pt-0 last:pb-0">
+                      <button
+                        onClick={() => handleToggle(faq.id)}
+                        className="w-full flex items-center justify-between text-left group cursor-pointer focus:outline-none"
+                        aria-expanded={isOpen}
+                      >
+                        <span className="font-serif-instrument text-[24px] sm:text-[28px] md:text-[32px] font-normal text-white flex items-center gap-2 group-hover:text-white/90">
+                          <span className="opacity-80">+</span> {faq.question}
+                        </span>
+                        <motion.span
+                          animate={{ rotate: isOpen ? 180 : 0 }}
+                          transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                          className="text-2xl text-white ml-4 flex-shrink-0 font-serif-instrument"
+                        >
+                          {isOpen ? '—' : '+'}
+                        </motion.span>
+                      </button>
 
-                    {isOpen && (
-                      <div className="mt-4 font-mono-geist text-[14px] sm:text-[15px] leading-[1.65] text-white/85 max-w-[760px] pl-5 sm:pl-6 animate-fadeIn">
-                        {faq.answer}
-                      </div>
-                    )}
-                  </div>
-                );
-              })}
-            </div>
-          </CornerCrossBox>
-        </div>
+                      <AnimatePresence initial={false}>
+                        {isOpen && (
+                          <motion.div
+                            initial={{ height: 0, opacity: 0 }}
+                            animate={{ height: 'auto', opacity: 1 }}
+                            exit={{ height: 0, opacity: 0 }}
+                            transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                            className="overflow-hidden"
+                          >
+                            <div className="pt-4 font-mono-geist text-[14px] sm:text-[15px] leading-[1.65] text-white/85 max-w-[760px] pl-5 sm:pl-6">
+                              {faq.answer}
+                            </div>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </div>
+                  );
+                })}
+              </div>
+            </CornerCrossBox>
+          </div>
+        </MotionReveal>
       </div>
     </section>
   );
