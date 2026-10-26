@@ -56,7 +56,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenContact, onExploreProjects }) 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.4, ease: [0.215, 0.61, 0.355, 1] }}
-          className="font-mono-geist text-[14px] sm:text-[16px] md:text-[18px] leading-[1.6] sm:leading-[28px] text-black/75 max-w-[600px] mb-8 sm:mb-10"
+          className="font-mono-geist text-[14px] sm:text-[16px] md:text-[18px] leading-[1.6] sm:leading-[28px] text-black/75 max-w-[600px] mb-12 sm:mb-16"
         >
           Intersection of software engineering, generative AI,
           cybersecurity, and thoughtful interface design.
@@ -67,7 +67,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenContact, onExploreProjects }) 
           initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.55, ease: [0.215, 0.61, 0.355, 1] }}
-          className="flex flex-row items-center gap-3 sm:gap-4"
+          className="flex flex-row items-center gap-3 sm:gap-4 mt-2 sm:mt-4"
         >
           <SlidingButton
             label1="View Projects"
