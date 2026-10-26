@@ -53,7 +53,7 @@ export const Footer: React.FC = () => {
               GitHub
             </a>
             <a
-              href="https://linkedin.com/a-gokulan"
+              href="https://linkedin.com/in/a-gokulan"
               target="_blank"
               rel="noopener noreferrer"
               className="hover:text-[#0700ff] transition-colors"
@@ -61,7 +61,7 @@ export const Footer: React.FC = () => {
               LinkedIn
             </a>
             <a
-              href="https://twitter.com/in/rkivln"
+              href="https://twitter.com/rkivln"
               target="_blank"
               rel="noopener noreferrer"
               className="hover:text-[#0700ff] transition-colors"
