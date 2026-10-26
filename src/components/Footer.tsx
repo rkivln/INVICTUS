@@ -45,7 +45,7 @@ export const Footer: React.FC = () => {
           <div className="flex flex-col gap-3 text-black/85">
             <span className="text-xs uppercase text-[#0700ff] font-semibold mb-1">Presence</span>
             <a
-              href="https://github.com"
+              href="https://github.com/rkivln"
               target="_blank"
               rel="noopener noreferrer"
               className="hover:text-[#0700ff] transition-colors"
@@ -53,7 +53,7 @@ export const Footer: React.FC = () => {
               GitHub
             </a>
             <a
-              href="https://linkedin.com"
+              href="https://linkedin.com/a-gokulan"
               target="_blank"
               rel="noopener noreferrer"
               className="hover:text-[#0700ff] transition-colors"
@@ -61,7 +61,7 @@ export const Footer: React.FC = () => {
               LinkedIn
             </a>
             <a
-              href="https://twitter.com"
+              href="https://twitter.com/in/rkivln"
               target="_blank"
               rel="noopener noreferrer"
               className="hover:text-[#0700ff] transition-colors"
