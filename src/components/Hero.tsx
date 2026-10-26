@@ -47,8 +47,8 @@ export const Hero: React.FC<HeroProps> = ({ onOpenContact, onExploreProjects }) 
           transition={{ duration: 0.7, delay: 0.25, ease: [0.215, 0.61, 0.355, 1] }}
           className="font-serif-instrument text-[52px] sm:text-[80px] md:text-[110px] leading-[0.91] tracking-[-2px] sm:tracking-[-3px] font-normal text-black mb-6 sm:mb-8 max-w-[700px]"
         >
-          Engineering,<br />
-          built with intent.
+          Gokulan<br />
+          Anbalagan
         </motion.h1>
 
         {/* Monospace Subtitle */}
