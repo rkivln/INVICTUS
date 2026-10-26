@@ -1,7 +1,7 @@
 import React from 'react';
-import smvecImg from '../assets/images/smvec_education_halftone_1792935010581.jpg';
-import cyberguardImg from '../assets/images/cyberguard_sih_halftone_1792935036180.jpg';
-import evorigenImg from '../assets/images/evorigen_heritage_halftone_1792935057834.jpg';
+import smvecCleanBuildingImg from '../assets/images/smvec_clean_building_grain_1792980554291.jpg';
+import shieldImg from '../assets/images/roman_shield_grain_1792980006647.jpg';
+import forumImg from '../assets/images/roman_forum_grain_1792980026977.jpg';
 
 export const Team: React.FC = () => {
   const milestones = [
@@ -10,24 +10,24 @@ export const Team: React.FC = () => {
       role: '+ B.Tech CSEBS • Class of 2029',
       description:
         'Computer Science and Engineering & Business Systems undergraduate at Sri Manakula Vinayagar Engineering College, combining computer science fundamentals with strategic business thinking.',
-      image: smvecImg,
-      alt: 'Classical halftone engraving of university academy building and computer logic grid.',
+      image: smvecCleanBuildingImg,
+      alt: 'Sri Manakula Vinayagar Engineering College building architecture in text-free cobalt blue halftone grain style.',
     },
     {
       title: 'CyberGuard',
       role: '+ SIH Internal Selection • Top 15',
       description:
         'Led technical innovation for Smart India Hackathon internal selection with PRAMAANX, architecting AI biometric document screening, ELA tampering analysis, and risk scoring pipelines.',
-      image: cyberguardImg,
-      alt: 'Halftone cobalt blue classical shield with biometric fingerprint circuit emblem.',
+      image: shieldImg,
+      alt: 'Classical Roman statue of an armored soldier with a legionary shield in cobalt blue film grain.',
     },
     {
       title: 'EVORIGEN',
       role: '+ Ignite Cohort • Venture Creation',
       description:
         'Startup venture focused on the digital preservation of cultural heritage and legacy knowledge, developed through customer discovery and problem definition in the Ignite Full Cohort.',
-      image: evorigenImg,
-      alt: 'Halftone cobalt blue ionic pillars framing an ancient scroll with digital data streams.',
+      image: forumImg,
+      alt: 'Classical Roman Forum marble columns and triumphal archway in cobalt blue stipple texture.',
     },
   ];
 

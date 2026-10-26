@@ -55,8 +55,8 @@ export const PartnersAndRelief: React.FC = () => {
             className="w-full h-auto object-cover object-bottom select-none"
           />
 
-          {/* Statement overlaid on the bottom-left */}
-          <div className="absolute bottom-8 left-6 md:left-8 max-w-[660px] z-10">
+          {/* Statement overlaid on the top-left blank whitespace */}
+          <div className="absolute top-8 left-6 md:left-8 max-w-[660px] z-10">
             <p className="font-mono-geist text-[14px] sm:text-[16px] md:text-[18px] leading-[1.6] text-black/80 backdrop-blur-[1px]">
               Gokulan combines computer science fundamentals with business systems thinking, designing applications that are observable, resilient, and human-centered.
             </p>

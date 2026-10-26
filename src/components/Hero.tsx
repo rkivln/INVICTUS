@@ -8,7 +8,7 @@ interface HeroProps {
 
 export const Hero: React.FC<HeroProps> = ({ onOpenContact, onExploreProjects }) => {
   return (
-    <section className="relative w-full overflow-hidden min-h-[640px] sm:min-h-[720px] lg:min-h-[830px] flex items-center">
+    <section className="relative w-full overflow-hidden min-h-[580px] sm:min-h-[660px] lg:min-h-[760px] flex items-start pt-4 sm:pt-8">
       {/* Halftone Angel Sculpture Image */}
       <div className="absolute inset-0 w-full h-full pointer-events-none select-none z-0">
         <img
@@ -20,7 +20,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenContact, onExploreProjects }) 
         <div className="absolute inset-0 bg-gradient-to-r from-[#f5f5f5] via-[#f5f5f5]/70 to-transparent md:hidden pointer-events-none" />
       </div>
 
-      <div className="relative z-10 max-w-[1440px] w-full mx-auto px-5 sm:px-6 md:px-8 py-10 sm:py-16 flex flex-col justify-center">
+      <div className="relative z-10 max-w-[1440px] w-full mx-auto px-5 sm:px-6 md:px-8 pt-4 pb-12 sm:pt-8 sm:pb-16 flex flex-col justify-start">
         {/* Monospace Pre-heading Tag */}
         <div className="inline-flex items-start sm:items-center gap-1.5 text-xs sm:text-xs md:text-sm font-mono-geist font-medium text-black mb-6 sm:mb-8">
           <span className="text-[#0700ff] font-bold">+</span>
